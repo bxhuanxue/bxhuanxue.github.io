@@ -1,27 +1,29 @@
-// 使用CORS代理解决跨域问题
-const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-const locationApiUrl = 'https://apis.map.qq.com/ws/location/v1/ip?key=QNWBZ-K24WT-Z4CXP-VWWLJ-YC6FE-UFFVM';
-
-fetch(proxyUrl + locationApiUrl)
-    .then(response => {
-        console.log('Location API Response:', response); // 调试：查看位置API的响应
-        return response.json();
-    })
-    .then(data => {
-        console.log('Location Data:', data); // 调试：查看解析后的位置数据
-        if (data.status === 0) {
-            const location = data.result.ad_info;
-            const city = location.city;
-            console.log('Location:', city); // 调试：输出获取到的城市名称
-
-            // 获取天气信息
-            getWeather(city);
-        } else {
-            console.error('Failed to retrieve location:', data.message);
+// 获取位置信息
+function fetchLocationAndWeather() {
+    $.ajax({
+        type: 'get',
+        url: 'https://apis.map.qq.com/ws/location/v1/ip',
+        data: {
+            key: 'QNWBZ-K24WT-Z4CXP-VWWLJ-YC6FE-UFFVM',
+            output: 'jsonp',
+        },
+        dataType: 'jsonp',
+        success: function (res) {
+            console.log('Location Data:', res);
+            if (res.status === 0) {
+                const city = res.result.ad_info.city;
+                getWeather(city);
+            } else {
+                console.error('Failed to retrieve location:', res.message);
+            }
+        },
+        error: function (err) {
+            console.error('Location API Error:', err);
         }
-    })
-    .catch(err => console.error('Location API Error:', err)); // 调试：捕获和显示位置API的错误
+    });
+}
 
+// 获取天气信息
 function getWeather(city) {
     const apiKey = '3f3c1b4a1586ffe0a7291c4556ad9f5f'; // 你的OpenWeatherMap API密钥
     const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
@@ -30,7 +32,9 @@ function getWeather(city) {
 
     fetch(apiUrl)
         .then(response => {
-            console.log('Weather API Response:', response); // 调试：查看天气API的响应
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
             return response.json();
         })
         .then(data => {
@@ -62,7 +66,7 @@ function getWeather(city) {
                 console.log('No matching weather condition found.');
             }
         })
-        .catch(err => console.error('Weather API Error:', err)); // 调试：捕获和显示天气API的错误
+        .catch(err => console.error('Weather API Error:', err));
 }
 function showCloudy() {
     console.log('Rendering Cloudy Weather'); // 调试：渲染阴天效果
@@ -131,3 +135,4 @@ function showThunder() {
         </div>
     `;
 }
+window.onload = fetchLocationAndWeather;
