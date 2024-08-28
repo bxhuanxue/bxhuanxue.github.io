@@ -1,12 +1,14 @@
-// Display weather effect based on weather type
 // 正确的jQuery加载方式
-const script = document.createElement('script');
-script.src = "https://code.jquery.com/jquery-3.6.0.min.js";
-script.onload = function() {
-    // jQuery加载完毕，执行主逻辑
-    fetchLocationAndWeather();
-};
-document.head.appendChild(script);
+(function() {
+    const script = document.createElement('script');
+    script.src = "https://code.jquery.com/jquery-3.6.0.min.js";
+    script.onload = function() {
+        // jQuery加载完毕，执行主逻辑
+        fetchLocationAndWeather();
+    };
+    document.head.appendChild(script);
+})();
+
 function showWeather(weatherType) {
     const container = document.getElementById('weather-container');
     container.innerHTML = ''; // 清空容器内容
