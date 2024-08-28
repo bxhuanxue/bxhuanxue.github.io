@@ -1,4 +1,5 @@
 // Display weather effect based on weather type
+src="https://code.jquery.com/jquery-3.6.0.min.js"
 function showWeather(weatherType) {
     const container = document.getElementById('weather-container');
     container.innerHTML = ''; // Clear container content
