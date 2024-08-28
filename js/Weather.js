@@ -1,13 +1,18 @@
 // Display weather effect based on weather type
-src="https://code.jquery.com/jquery-3.6.0.min.js"
+// 正确的jQuery加载方式
+const script = document.createElement('script');
+script.src = "https://code.jquery.com/jquery-3.6.0.min.js";
+script.onload = function() {
+    // jQuery加载完毕，执行主逻辑
+    fetchLocationAndWeather();
+};
+document.head.appendChild(script);
 function showWeather(weatherType) {
     const container = document.getElementById('weather-container');
-    container.innerHTML = ''; // Clear container content
+    container.innerHTML = ''; // 清空容器内容
 
     if (weatherType === 'cloud') {
-        container.innerHTML = `
-            <div class="cloud"></div>
-        `;
+        container.innerHTML = `<div class="cloud"></div>`;
     } else if (weatherType === 'rain') {
         container.innerHTML = `
             <div class="cloud_rain">
@@ -64,7 +69,7 @@ function showWeather(weatherType) {
     }
 }
 
-// Fetch user's location and weather data
+// 获取用户位置和天气数据
 function fetchLocationAndWeather() {
     $.ajax({
         type: 'get',
@@ -89,12 +94,12 @@ function fetchLocationAndWeather() {
     });
 }
 
-// Fetch weather information based on city
+// 根据城市获取天气信息
 function getWeather(city) {
-    const apiKey = '3f3c1b4a1586ffe0a7291c4556ad9f5f'; // Your OpenWeatherMap API key
+    const apiKey = '3f3c1b4a1586ffe0a7291c4556ad9f5f'; // OpenWeatherMap API密钥
     const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
-    console.log('Weather API URL:', apiUrl); // Debug: Output constructed Weather API URL
+    console.log('Weather API URL:', apiUrl); // 调试: 输出构建的天气API URL
 
     fetch(apiUrl)
         .then(response => {
@@ -104,12 +109,12 @@ function getWeather(city) {
             return response.json();
         })
         .then(data => {
-            console.log('Weather Data:', data); // Debug: View parsed weather data
+            console.log('Weather Data:', data); // 调试: 查看解析的天气数据
 
             const weather = data.weather[0].main.toLowerCase();
-            console.log('Weather:', weather); // Debug: Output weather condition
+            console.log('Weather:', weather); // 调试: 输出天气情况
 
-            // Show weather effect based on condition
+            // 根据条件显示天气效果
             if (weather.includes('cloud')) {
                 console.log('Displaying Cloudy Weather');
                 showWeather('cloud');
@@ -131,6 +136,3 @@ function getWeather(city) {
         })
         .catch(err => console.error('Weather API Error:', err));
 }
-
-// Call the function on page load to fetch and display weather
-document.addEventListener('DOMContentLoaded', fetchLocationAndWeather);
