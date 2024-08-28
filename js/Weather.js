@@ -147,5 +147,3 @@ function showThunder() {
         </div>`;
 }
 
-// 页面加载时获取位置和天气信息
-document.addEventListener('DOMContentLoaded', fetchLocationAndWeather);
