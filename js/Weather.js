@@ -77,69 +77,58 @@ function showWeather(weatherType) {
 }
 
 // 获取用户位置和天气数据
-function fetchLocationAndWeather() {
-    $.ajax({
-        type: 'get',
-        url: 'https://apis.map.qq.com/ws/location/v1/ip',
-        data: {
-            key: 'QNWBZ-K24WT-Z4CXP-VWWLJ-YC6FE-UFFVM',
-            output: 'jsonp',
-        },
-        dataType: 'jsonp',
-        success: function (res) {
-            console.log('Location Data:', res);
-            if (res.status === 0) {
-                const city = res.result.ad_info.city;
-                getWeather(city);
-            } else {
-                console.error('Failed to retrieve location:', res.message);
-            }
-        },
-        error: function (err) {
-            console.error('Location API Error:', err);
+async function fetchLocationAndWeather() {
+    try {
+        const response = await fetch('https://apis.map.qq.com/ws/location/v1/ip?key=QNWBZ-K24WT-Z4CXP-VWWLJ-YC6FE-UFFVM&output=jsonp');
+        const data = await response.json();
+        console.log('Location Data:', data);
+        if (data.status === 0) {
+            const city = data.result.ad_info.city;
+            getWeather(city);
+        } else {
+            console.error('Failed to retrieve location:', data.message);
         }
-    });
+    } catch (error) {
+        console.error('Location API Error:', error);
+    }
 }
 
 // 根据城市获取天气信息
-function getWeather(city) {
+async function getWeather(city) {
     const apiKey = '3f3c1b4a1586ffe0a7291c4556ad9f5f'; // OpenWeatherMap API密钥
     const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
-    console.log('Weather API URL:', apiUrl); // 调试: 输出构建的天气API URL
+    try {
+        const response = await fetch(apiUrl);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        console.log('Weather Data:', data); // 调试: 查看解析的天气数据
 
-    fetch(apiUrl)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('Weather Data:', data); // 调试: 查看解析的天气数据
+        const weather = data.weather[0].main.toLowerCase();
+        console.log('Weather:', weather); // 调试: 输出天气情况
 
-            const weather = data.weather[0].main.toLowerCase();
-            console.log('Weather:', weather); // 调试: 输出天气情况
-
-            // 根据条件显示天气效果
-            if (weather.includes('cloud')) {
-                console.log('Displaying Cloudy Weather');
-                showWeather('cloud');
-            } else if (weather.includes('rain')) {
-                console.log('Displaying Rainy Weather');
-                showWeather('rain');
-            } else if (weather.includes('snow')) {
-                console.log('Displaying Snowy Weather');
-                showWeather('snow');
-            } else if (weather.includes('clear')) {
-                console.log('Displaying Sunny Weather');
-                showWeather('sun');
-            } else if (weather.includes('thunderstorm')) {
-                console.log('Displaying Thunderstorm Weather');
-                showWeather('thunder');
-            } else {
-                console.log('No matching weather condition found.');
-            }
-        })
-        .catch(err => console.error('Weather API Error:', err));
+        // 根据条件显示天气效果
+        if (weather.includes('cloud')) {
+            console.log('Displaying Cloudy Weather');
+            showWeather('cloud');
+        } else if (weather.includes('rain')) {
+            console.log('Displaying Rainy Weather');
+            showWeather('rain');
+        } else if (weather.includes('snow')) {
+            console.log('Displaying Snowy Weather');
+            showWeather('snow');
+        } else if (weather.includes('clear')) {
+            console.log('Displaying Sunny Weather');
+            showWeather('sun');
+        } else if (weather.includes('thunderstorm')) {
+            console.log('Displaying Thunderstorm Weather');
+            showWeather('thunder');
+        } else {
+            console.log('No matching weather condition found.');
+        }
+    } catch (error) {
+        console.error('Weather API Error:', error);
+    }
 }
