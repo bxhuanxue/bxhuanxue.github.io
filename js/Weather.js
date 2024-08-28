@@ -147,3 +147,26 @@ function showThunder() {
         </div>`;
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+    const clickFnOfSubMenu = () => {
+        const handleClickOfSubMenu = e => {
+            const target = e.target.closest('.site-page.group');
+            if (!target) return;
+            target.classList.toggle('hide');
+        };
+
+        const sidebarMenus = document.querySelector('#sidebar-menus');
+        if (sidebarMenus) {
+            sidebarMenus.addEventListener('click', e => {
+                const menusItems = e.target.closest('.menus_items');
+                if (menusItems) {
+                    handleClickOfSubMenu(e);
+                }
+            });
+        } else {
+            console.error('Element #sidebar-menus not found.');
+        }
+    };
+
+    clickFnOfSubMenu();
+});
