@@ -1,4 +1,8 @@
-fetch('https://apis.map.qq.com/ws/location/v1/ip?key=QNWBZ-K24WT-Z4CXP-VWWLJ-YC6FE-UFFVM')
+// 使用CORS代理解决跨域问题
+const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+const locationApiUrl = 'https://apis.map.qq.com/ws/location/v1/ip?key=QNWBZ-K24WT-Z4CXP-VWWLJ-YC6FE-UFFVM';
+
+fetch(proxyUrl + locationApiUrl)
     .then(response => {
         console.log('Location API Response:', response); // 调试：查看位置API的响应
         return response.json();
@@ -60,7 +64,6 @@ function getWeather(city) {
         })
         .catch(err => console.error('Weather API Error:', err)); // 调试：捕获和显示天气API的错误
 }
-
 function showCloudy() {
     console.log('Rendering Cloudy Weather'); // 调试：渲染阴天效果
     document.body.innerHTML = '<div class="cloud"></div>';
