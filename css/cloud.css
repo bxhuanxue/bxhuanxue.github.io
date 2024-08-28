@@ -679,7 +679,7 @@ body{
     transform: scale(0.5) rotate(0deg);
     filter: blur(3px);
     animation: musicSymbolAnimation 3s ease-in-out infinite;
-    background: url('music-notes-svgrepo-com.svg') no-repeat center center;
+    background: url('source\img\music-notes-svgrepo-com.svg') no-repeat center center;
     background-size: contain;
 }
 

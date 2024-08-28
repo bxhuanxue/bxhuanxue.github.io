@@ -102,7 +102,7 @@ function showSnow() {
                 <div class="snowflake small" style="left: 130px; animation-delay: 0.9s;"></div>
                 <div class="snowflake small" style="left: 160px; animation-delay: 1s;"></div>
                 <div class="snowflake small" style="left: 220px; animation-delay: 0.1s;"></div>
-                <img src="snowman-svgrepo.svg" class="snowman" alt="Snowman">
+                <img src="source\img\snowman-svgrepo.svg" class="snowman" alt="Snowman">
             </div>
         </div>
     `;
