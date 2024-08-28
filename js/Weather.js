@@ -68,34 +68,42 @@ function getWeather(city) {
         })
         .catch(err => console.error('Weather API Error:', err));
 }
+
+// 显示阴天效果
 function showCloudy() {
-    console.log('Rendering Cloudy Weather'); // 调试：渲染阴天效果
-    document.body.innerHTML = '<div class="cloud"></div>';
-}
-
-function showRain() {
-    console.log('Rendering Rainy Weather'); // 调试：渲染下雨效果
+    console.log('Rendering Cloudy Weather');
     document.body.innerHTML = `
-        <div class="cloud_rain">
-            <div class="rain" style="left: 30px; animation-delay: 0s;"></div>
-            <div class="rain" style="left: 60px; animation-delay: 0.1s;"></div>
-            <div class="rain" style="left: 90px; animation-delay: 0.2s;"></div>
-            <div class="rain" style="left: 120px; animation-delay: 0.3s;"></div>
-            <div class="rain" style="left: 150px; animation-delay: 0.4s;"></div>
-        </div>
-        <div class="puddle puddle1"></div>
-        <div class="puddle puddle2"></div>
-        <div class="puddle puddle3"></div>
-        <div class="puddle puddle4"></div>
-        <div class="puddle puddle5"></div>
-        <div class="puddle puddle6"></div>
-        <div class="puddle puddle7"></div>
-        <div class="puddle puddle8"></div>
-    `;
+        <div class="container">
+            <div class="cloud"></div>
+        </div>`;
 }
 
+// 显示下雨效果
+function showRain() {
+    console.log('Rendering Rainy Weather');
+    document.body.innerHTML = `
+        <div class="container">
+            <div class="cloud_rain">
+                <div class="rain" style="left: 30px; animation-delay: 0s;"></div>
+                <div class="rain" style="left: 60px; animation-delay: 0.1s;"></div>
+                <div class="rain" style="left: 90px; animation-delay: 0.2s;"></div>
+                <div class="rain" style="left: 120px; animation-delay: 0.3s;"></div>
+                <div class="rain" style="left: 150px; animation-delay: 0.4s;"></div>
+            </div>
+            <div class="puddle puddle1"></div>
+            <div class="puddle puddle2"></div>
+            <div class="puddle puddle3"></div>
+            <div class="puddle puddle4"></div>
+            <div class="puddle puddle5"></div>
+            <div class="puddle puddle6"></div>
+            <div class="puddle puddle7"></div>
+            <div class="puddle puddle8"></div>
+        </div>`;
+}
+
+// 显示下雪效果
 function showSnow() {
-    console.log('Rendering Snowy Weather'); // 调试：渲染下雪效果
+    console.log('Rendering Snowy Weather');
     document.body.innerHTML = `
         <div class="container">
             <div class="cloud_snow">
@@ -109,30 +117,35 @@ function showSnow() {
                 <div class="snowflake small" style="left: 130px; animation-delay: 0.9s;"></div>
                 <div class="snowflake small" style="left: 160px; animation-delay: 1s;"></div>
                 <div class="snowflake small" style="left: 220px; animation-delay: 0.1s;"></div>
-                <img src="source\img\snowman-svgrepo.svg" class="snowman" alt="Snowman">
+                <img src="snowman-svgrepo.svg" class="snowman" alt="Snowman">
             </div>
-        </div>
-    `;
+        </div>`;
 }
 
+// 显示晴天效果
 function showSunny() {
-    console.log('Rendering Sunny Weather'); // 调试：渲染晴天效果
+    console.log('Rendering Sunny Weather');
     document.body.innerHTML = `
-        <div class="cloud_sun">
-            <div class="sun"></div>
-        </div>
-    `;
+        <div class="container">
+            <div class="cloud_sun">
+                <div class="sun"></div>
+            </div>
+        </div>`;
 }
 
+// 显示打雷效果
 function showThunder() {
-    console.log('Rendering Thunderstorm Weather'); // 调试：渲染雷暴效果
+    console.log('Rendering Thunderstorm Weather');
     document.body.innerHTML = `
-        <div class="cloud_thunder">
-            <div class="lightning"></div>
-            <div class="music_symbol"></div>
-            <div class="music_symbol" style="top: 70px; left: 140px;"></div>
-            <div class="music_symbol" style="top: 90px; left: 80px;"></div>
-        </div>
-    `;
+        <div class="container">
+            <div class="cloud_thunder">
+                <div class="lightning"></div>
+                <div class="music_symbol"></div>
+                <div class="music_symbol" style="top: 70px; left: 140px;"></div>
+                <div class="music_symbol" style="top: 90px; left: 80px;"></div>
+            </div>
+        </div>`;
 }
-window.onload = fetchLocationAndWeather;
+
+// 页面加载时获取位置和天气信息
+document.addEventListener('DOMContentLoaded', fetchLocationAndWeather);
