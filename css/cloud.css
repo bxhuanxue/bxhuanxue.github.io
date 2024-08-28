@@ -1,0 +1,877 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgb(191, 186, 186);
+}
+
+
+
+.container{
+    width: 500px;
+    height: 500px;
+    background: #eee;
+    position: relative;
+}
+
+.container .cloud{
+    width: 100px;
+    height: 100px;
+    background: #ccc;
+    position: absolute;
+    transform: translate(100px,120px);
+    border-radius: 50%;
+    box-shadow: 
+        40px 20px 0 0 #ccc,
+        60px -20px 0 0 #ccc,
+        120px 20px 0 0 #ccc,
+        160px 20px 0 0 #ccc,
+        90px 30px 0 0 #ccc,
+        110px -20px 0 0 #ccc,
+        140px 10px 0 0 #ccc;
+    animation: moveClouds 5s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+}
+
+.cloud::before, .cloud::after {
+    content: '';
+    position: absolute;
+    background: #ccc;
+    border-radius: 50%;
+}
+
+.cloud::before {
+    width: 160px;
+    height: 80px; /* 扁平化 */
+    top: 10px;
+    left: -10px;
+
+}
+
+.cloud::after {
+    width: 200px;
+    height: 15px;
+    bottom: -100px;
+    left: 20px;
+    background: rgba(150, 150, 150, 0.6);
+    border-radius: 50%;
+    content: '';
+    position: absolute;
+    opacity: 1; /* 初始不透明度 */
+}
+
+@keyframes moveClouds {
+    0% {
+        transform: translate(100px, 120px);
+        box-shadow:
+            40px 20px 0 0 rgba(204, 204, 204, 0.8),
+            60px -20px 0 0 rgba(204, 204, 204, 0.8),
+            120px 20px 0 0 rgba(204, 204, 204, 0.8),
+            160px 20px 0 0 rgba(204, 204, 204, 0.8),
+            90px 30px 0 0 rgba(204, 204, 204, 0.8),
+            110px -20px 0 0 rgba(204, 204, 204, 0.8),
+            140px 10px 0 0 rgba(204, 204, 204, 0.8),
+            20px 50px 20px 2px rgba(190, 190, 190, 0.5),
+            80px 40px 20px 2px rgba(180, 180, 180, 0.5),
+            140px 60px 20px 2px rgba(170, 170, 170, 0.5),
+            60px 10px 20px 3px rgba(160, 160, 160, 0.6),
+            100px -10px 20px 3px rgba(150, 150, 150, 0.6);
+        opacity: 1; /* 初始不透明度 */
+    }
+    50% {
+        transform: translate(300px, 120px) scale(1.05);
+        box-shadow:
+            50px 20px 0 0 rgba(204, 204, 204, 0.8),
+            70px -20px 0 0 rgba(204, 204, 204, 0.8),
+            130px 20px 0 0 rgba(204, 204, 204, 0.8),
+            170px 20px 0 0 rgba(204, 204, 204, 0.8),
+            100px 30px 0 0 rgba(204, 204, 204, 0.8),
+            120px -20px 0 0 rgba(204, 204, 204, 0.8),
+            150px 10px 0 0 rgba(204, 204, 204, 0.8),
+            30px 55px 20px 2px rgba(190, 190, 190, 0.5),
+            90px 45px 20px 2px rgba(180, 180, 180, 0.5),
+            150px 65px 20px 2px rgba(170, 170, 170, 0.5),
+            70px 15px 20px 3px rgba(160, 160, 160, 0.6),
+            110px -5px 20px 3px rgba(150, 150, 150, 0.6);
+        opacity: 0.5; /* 中段整体变淡 */
+    }
+    100% {
+        transform: translate(100px, 120px);
+        box-shadow:
+            40px 20px 0 0 rgba(204, 204, 204, 0.8),
+            60px -20px 0 0 rgba(204, 204, 204, 0.8),
+            120px 20px 0 0 rgba(204, 204, 204, 0.8),
+            160px 20px 0 0 rgba(204, 204, 204, 0.8),
+            90px 30px 0 0 rgba(204, 204, 204, 0.8),
+            110px -20px 0 0 rgba(204, 204, 204, 0.8),
+            140px 10px 0 0 rgba(204, 204, 204, 0.8),
+            20px 50px 20px 2px rgba(190, 190, 190, 0.5),
+            80px 40px 20px 2px rgba(180, 180, 180, 0.5),
+            140px 60px 20px 2px rgba(170, 170, 170, 0.5),
+            60px 10px 20px 3px rgba(160, 160, 160, 0.6),
+            100px -10px 20px 3px rgba(150, 150, 150, 0.6);
+        opacity: 1; /* 恢复初始不透明度 */
+    }
+}
+
+
+/* 
+   下雨天气效果
+   使用::before或::after伪元素生成雨滴
+   动画通过Y轴的位移模拟下落
+*/
+/* Cloud styling remains the same */
+.container .cloud_rain {
+    width: 100px;
+    height: 100px;
+    background: #ccc;
+    position: absolute;
+    transform: translate(100px, 120px);
+    border-radius: 50%;
+    box-shadow: 
+        40px 20px 0 0 #ccc,
+        60px -20px 0 0 #ccc,
+        120px 20px 0 0 #ccc,
+        160px 20px 0 0 #ccc,
+        90px 30px 0 0 #ccc,
+        110px -20px 0 0 #ccc,
+        140px 10px 0 0 #ccc;
+    animation: moveRainClouds 5s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+}
+
+.cloud_rain::before, .cloud_rain::after {
+    content: '';
+    position: absolute;
+    background: #ccc;
+    border-radius: 50%;
+}
+
+.cloud_rain::before {
+    width: 160px;
+    height: 80px;
+    top: 10px;
+    left: -10px;
+}
+
+.cloud_rain::after {
+    width: 200px;
+    height: 15px;
+    bottom: -100px;
+    left: 20px;
+    background: rgba(150, 150, 150, 0.6);
+    border-radius: 50%;
+    content: '';
+    position: absolute;
+    opacity: 1;
+}
+
+/* Rain droplets */
+.cloud_rain .rain {
+    position: absolute;
+    width: 2px;
+    height: 15px;
+    background: rgba(150, 150, 150, 0.8);
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%) rotate(15deg);
+    animation: rainFall 0.5s linear infinite;
+    box-shadow: 0 0 5px rgba(150, 150, 150, 0.5);
+}
+
+/* Puddle styling - Fixed position */
+.puddle {
+    position: fixed; /* 将 position 设置为 fixed */
+    background: rgba(174, 226, 244, 0.5); /* Light blue color with some transparency */
+    border-radius: 50% 70% 60% 80% / 40% 50% 70% 60%; /* Irregular shape */
+    opacity: 0;
+    transform: rotate(-10deg); /* Slight rotation for a more natural look */
+    animation: puddleFade 5s linear infinite;
+    filter: blur(2px); /* Slight blur to make the puddle softer */
+}
+
+/* Specific puddle instances */
+.puddle.puddle1 {
+    width: 60px;
+    height: 20px;
+    left: 140px;  /* 修改为与 .cloud_rain::before 左对齐 */
+    top: 400px;  /* 修改为 .cloud_rain::before 的下方 */
+    border-radius: 60% 40% 50% 70% / 50% 60% 40% 30%;
+    animation-delay: 0s;
+    
+}
+
+.puddle.puddle2 {
+    width: 40px;
+    height: 15px;
+    left: 190px;  /* 修改为与 .cloud_rain::before 左对齐 */
+    top: 400px;  /* 修改为 .cloud_rain::before 的下方 */
+    border-radius: 70% 50% 60% 50% / 40% 60% 50% 70%;
+    animation-delay: 0.5s;
+}
+
+.puddle.puddle3 {
+    width: 50px;
+    height: 15px;
+    left: 250px;  /* 修改为与 .cloud_rain::before 左对齐 */
+    top: 400px;  /* 修改为 .cloud_rain::before 的下方 */
+    border-radius: 60% 70% 50% 40% / 50% 60% 40% 30%;
+    animation-delay: 2s;
+}
+
+.puddle.puddle4 {
+    width: 30px;
+    height: 10px;
+    left: 340px;  /* 修改为与 .cloud_rain::before 左对齐 */
+    top: 400px;  /* 修改为 .cloud_rain::before 的下方 */
+    border-radius: 80% 60% 50% 70% / 50% 70% 60% 40%;
+    animation-delay: 3s;
+}
+.puddle.puddle5 {
+    width: 60px;
+    height: 20px;
+    left: 410px;  /* 修改为与 .cloud_rain::before 左对齐 */
+    top: 400px;  /* 修改为 .cloud_rain::before 的下方 */
+    border-radius: 60% 40% 50% 70% / 50% 60% 40% 30%;
+    animation-delay: 4s;
+    
+}
+
+.puddle.puddle6 {
+    width: 40px;
+    height: 15px;
+    left: 480px;  /* 修改为与 .cloud_rain::before 左对齐 */
+    top: 400px;  /* 修改为 .cloud_rain::before 的下方 */
+    border-radius: 70% 50% 60% 50% / 40% 60% 50% 70%;
+    animation-delay: 5.5s;
+}
+
+.puddle.puddle7 {
+    width: 50px;
+    height: 15px;
+    left: 550px;  /* 修改为与 .cloud_rain::before 左对齐 */
+    top: 400px;  /* 修改为 .cloud_rain::before 的下方 */
+    border-radius: 60% 70% 50% 40% / 50% 60% 40% 30%;
+    animation-delay: 6s;
+}
+
+.puddle.puddle8 {
+    width: 30px;
+    height: 10px;
+    left: 600px;  /* 修改为与 .cloud_rain::before 左对齐 */
+    top: 400px;  /* 修改为 .cloud_rain::before 的下方 */
+    border-radius: 80% 60% 50% 70% / 50% 70% 60% 40%;
+    animation-delay: 7s;
+}
+/* Animation for rain */
+@keyframes rainFall {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%) rotate(15deg) translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(-50%) rotate(15deg) translateY(120px);
+    }
+}
+
+/* Animation for puddle fade */
+@keyframes puddleFade {
+    0% {
+        opacity: 0;
+        transform: scale(0.8) rotate(-10deg);
+    }
+    50% {
+        opacity: 0.6;
+        transform: scale(1) rotate(-10deg);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.8) rotate(-10deg);
+    }
+}
+
+/* Updated moveRainClouds animation */
+@keyframes moveRainClouds {
+    0%, 100% {
+        transform: translate(100px, 120px);
+        box-shadow:
+            40px 20px 0 0 rgba(204, 204, 204, 0.8),
+            60px -20px 0 0 rgba(204, 204, 204, 0.8),
+            120px 20px 0 0 rgba(204, 204, 204, 0.8),
+            160px 20px 0 0 rgba(204, 204, 204, 0.8),
+            90px 30px 0 0 rgba(204, 204, 204, 0.8),
+            110px -20px 0 0 rgba(204, 204, 204, 0.8),
+            140px 10px 0 0 rgba(204, 204, 204, 0.8),
+            20px 50px 20px 2px rgba(190, 190, 190, 0.5),
+            80px 40px 20px 2px rgba(180, 180, 180, 0.5),
+            140px 60px 20px 2px rgba(170, 170, 170, 0.5),
+            60px 10px 20px 3px rgba(160, 160, 160, 0.6),
+            100px -10px 20px 3px rgba(150, 150, 150, 0.6);
+    }
+    50% {
+        transform: translate(300px, 120px) scale(1.05);
+        box-shadow:
+            50px 20px 0 0 rgba(204, 204, 204, 0.8),
+            70px -20px 0 0 rgba(204, 204, 204, 0.8),
+            130px 20px 0 0 rgba(204, 204, 204, 0.8),
+            170px 20px 0 0 rgba(204, 204, 204, 0.8),
+            100px 30px 0 0 rgba(204, 204, 204, 0.8),
+            120px -20px 0 0 rgba(204, 204, 204, 0.8),
+            150px 10px 0 0 rgba(204, 204, 204, 0.8),
+            30px 55px 20px 2px rgba(190, 190, 190, 0.5),
+            90px 45px 20px 2px rgba(180, 180, 180, 0.5),
+            150px 65px 20px 2px rgba(170, 170, 170, 0.5),
+            70px 15px 20px 3px rgba(160, 160, 160, 0.6),
+            110px -5px 20px 3px rgba(150, 150, 150, 0.6);
+    }
+}
+
+/*
+   下雪效果
+   使用::before或::after伪元素生成雪花
+   动画通过Y轴的位移模拟雪花的飘落
+*/
+.container .cloud_snow {
+    width: 100px;
+    height: 100px;
+    background: #ccc;
+    position: absolute;
+    transform: translate(100px, 120px);
+    border-radius: 50%;
+    box-shadow: 
+        40px 20px 0 0 #ccc,
+        60px -20px 0 0 #ccc,
+        120px 20px 0 0 #ccc,
+        160px 20px 0 0 #ccc,
+        90px 30px 0 0 #ccc,
+        110px -20px 0 0 #ccc,
+        140px 10px 0 0 #ccc;
+    animation: moveSnowClouds 5s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+}
+
+.snowflake {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: fall 5s linear infinite;
+    filter: blur(1px); /* Slight blur */
+}
+
+.snowflake.large {
+    width: 10px;
+    height: 10px;
+    animation-duration: 4s;
+    animation-timing-function: ease-in;
+    margin-top: 100px;
+}
+
+/* Smaller snowflakes (background) */
+.snowflake.small {
+    top:90px;
+    width: 5px;
+    height: 5px;
+    opacity: 0.6;
+    animation-duration: 6s;
+    animation-timing-function: linear;
+    filter: blur(2px); /* More blur for background snowflakes */
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(0) translateX(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(200px) translateX(-30px);
+        opacity: 0.3; /* Snowflakes fade as they fall */
+    }
+}
+/* Snowflake positioning */
+.snowflake:nth-child(1) {
+    top: -10px;
+    left: 50px;
+}
+
+.snowflake:nth-child(2) {
+    top: 20px;
+    left: 70px;
+}
+
+.snowflake:nth-child(3) {
+    top: -30px;
+    left: 90px;
+}
+
+.snowflake:nth-child(4) {
+    top: 10px;
+    left: 120px;
+}
+
+.snowflake:nth-child(5) {
+    top: -20px;
+    left: 150px;
+}
+
+.cloud_snow::before, .cloud_snow::after {
+    content: '';
+    position: absolute;
+    background: #ccc;
+    border-radius: 50%;
+}
+
+.cloud_snow::before {
+    width: 160px;
+    height: 80px; /* 扁平化 */
+    top: 10px;
+    left: -10px;
+
+}
+
+.cloud_snow::after {
+    width: 200px;
+    height: 15px;
+    bottom: -100px;
+    left: 20px;
+    background: rgba(150, 150, 150, 0.6);
+    border-radius: 50%;
+    content: '';
+    position: absolute;
+    opacity: 1; /* 初始不透明度 */
+}
+
+@keyframes moveSnowClouds {
+    0% {
+        transform: translate(100px, 120px);
+        box-shadow:
+            40px 20px 0 0 rgba(204, 204, 204, 0.8),
+            60px -20px 0 0 rgba(204, 204, 204, 0.8),
+            120px 20px 0 0 rgba(204, 204, 204, 0.8),
+            160px 20px 0 0 rgba(204, 204, 204, 0.8),
+            90px 30px 0 0 rgba(204, 204, 204, 0.8),
+            110px -20px 0 0 rgba(204, 204, 204, 0.8),
+            140px 10px 0 0 rgba(204, 204, 204, 0.8),
+            20px 50px 20px 2px rgba(190, 190, 190, 0.5),
+            80px 40px 20px 2px rgba(180, 180, 180, 0.5),
+            140px 60px 20px 2px rgba(170, 170, 170, 0.5),
+            60px 10px 20px 3px rgba(160, 160, 160, 0.6),
+            100px -10px 20px 3px rgba(150, 150, 150, 0.6);
+        opacity: 1; /* 初始不透明度 */
+    }
+    50% {
+        transform: translate(300px, 120px) scale(1.05);
+        box-shadow:
+            50px 20px 0 0 rgba(204, 204, 204, 0.8),
+            70px -20px 0 0 rgba(204, 204, 204, 0.8),
+            130px 20px 0 0 rgba(204, 204, 204, 0.8),
+            170px 20px 0 0 rgba(204, 204, 204, 0.8),
+            100px 30px 0 0 rgba(204, 204, 204, 0.8),
+            120px -20px 0 0 rgba(204, 204, 204, 0.8),
+            150px 10px 0 0 rgba(204, 204, 204, 0.8),
+            30px 55px 20px 2px rgba(190, 190, 190, 0.5),
+            90px 45px 20px 2px rgba(180, 180, 180, 0.5),
+            150px 65px 20px 2px rgba(170, 170, 170, 0.5),
+            70px 15px 20px 3px rgba(160, 160, 160, 0.6),
+            110px -5px 20px 3px rgba(150, 150, 150, 0.6);
+        opacity: 0.5; /* 中段整体变淡 */
+    }
+    100% {
+        transform: translate(100px, 120px);
+        box-shadow:
+            40px 20px 0 0 rgba(204, 204, 204, 0.8),
+            60px -20px 0 0 rgba(204, 204, 204, 0.8),
+            120px 20px 0 0 rgba(204, 204, 204, 0.8),
+            160px 20px 0 0 rgba(204, 204, 204, 0.8),
+            90px 30px 0 0 rgba(204, 204, 204, 0.8),
+            110px -20px 0 0 rgba(204, 204, 204, 0.8),
+            140px 10px 0 0 rgba(204, 204, 204, 0.8),
+            20px 50px 20px 2px rgba(190, 190, 190, 0.5),
+            80px 40px 20px 2px rgba(180, 180, 180, 0.5),
+            140px 60px 20px 2px rgba(170, 170, 170, 0.5),
+            60px 10px 20px 3px rgba(160, 160, 160, 0.6),
+            100px -10px 20px 3px rgba(150, 150, 150, 0.6);
+        opacity: 1; /* 恢复初始不透明度 */
+    }
+}
+
+.snowman {
+    position: absolute; /* Positions the snowman relative to the container */
+    top: 130px; /* Approximately where you want the snowman vertically */
+    left: 200px; /* Adjust horizontally based on your layout */
+    width: 60px; /* Adjust size as needed */
+    height: auto; /* Maintain aspect ratio */
+    z-index: 10; /* Ensures the snowman appears above other elements */
+    animation: moveSnowman 7s infinite; /* Add animation for movement */
+}
+@keyframes moveSnowman {
+    0% {
+        transform: translateX(0); /* Starting position */
+    }
+    50% {
+        transform: translateX(-120px); /* Move 50px to the left */
+    }
+    100% {
+        transform: translateX(0); /* Return to starting position */
+    }
+}
+
+/* 闪电云 */
+.container .cloud_thunder {
+    width: 100px;
+    height: 100px;
+    background: #ccc;
+    position: absolute;
+    transform: translate(100px, 120px);
+    border-radius: 50%;
+    box-shadow: 
+        40px 20px 0 0 #ccc,
+        60px -20px 0 0 #ccc,
+        120px 20px 0 0 #ccc,
+        160px 20px 0 0 #ccc,
+        90px 30px 0 0 #ccc,
+        110px -20px 0 0 #ccc,
+        140px 10px 0 0 #ccc;
+    animation: moveThunderClouds 5s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+}
+
+.cloud_thunder::before, .cloud_thunder::after {
+    content: '';
+    position: absolute;
+    background: #ccc;
+    border-radius: 50%;
+}
+
+.cloud_thunder::before {
+    width: 160px;
+    height: 80px;
+    top: 10px;
+    left: -10px;
+}
+
+.cloud_thunder::after {
+    width: 200px;
+    height: 15px;
+    bottom: -100px;
+    left: 20px;
+    background: rgba(150, 150, 150, 0.6);
+    border-radius: 50%;
+    content: '';
+    position: absolute;
+    opacity: 1;
+}
+
+.lightning {
+    position: relative;
+    width: 30px;
+    height: 90px;
+    opacity: 0;
+    filter: blur(10px);
+    animation: flashLightning 2s ease-in-out infinite, lightningBlurEffect 2s ease-in-out infinite;
+}
+
+.lightning::before {
+    content: '';
+    position: absolute;
+    top: 120px;
+    left: 200%;
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 40px solid yellow; /* 调整三角形大小 */
+    transform: translateX(-50%) rotate(-45deg);
+}
+
+.lightning::after {
+    content: '';
+    position: absolute;
+    top: 150px; /* 调整这个值使两个三角形更好地连接 */
+    left: 250%;
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 40px solid yellow; /* 调整三角形大小 */
+    transform: translateX(-50%) rotate(-45deg);
+}
+
+/* 闪电闪烁和模糊动画 */
+@keyframes flashLightning {
+    0%, 45%, 100% {
+        opacity: 0;
+    }
+    55%, 65% {
+        opacity: 1;
+    }
+}
+
+@keyframes lightningBlurEffect {
+    0%, 45%, 100% {
+        filter: blur(10px);
+    }
+    55% {
+        filter: blur(3px);
+    }
+    65% {
+        filter: blur(0px);
+    }
+}
+
+/* 云亮度变化 */
+@keyframes flashCloud {
+    0%, 100% {
+        background: #ccc;
+    }
+    45%, 55% {
+        background: #eee;
+    }
+}
+
+/* 更新云层动画 */
+@keyframes moveThunderClouds {
+    0%, 100% {
+        transform: translate(100px, 120px);
+        box-shadow:
+            40px 20px 0 0 rgba(204, 204, 204, 0.8),
+            60px -20px 0 0 rgba(204, 204, 204, 0.8),
+            120px 20px 0 0 rgba(204, 204, 204, 0.8),
+            160px 20px 0 0 rgba(204, 204, 204, 0.8),
+            90px 30px 0 0 rgba(204, 204, 204, 0.8),
+            110px -20px 0 0 rgba(204, 204, 204, 0.8),
+            140px 10px 0 0 rgba(204, 204, 204, 0.8),
+            20px 50px 20px 2px rgba(190, 190, 190, 0.5),
+            80px 40px 20px 2px rgba(180, 180, 180, 0.5),
+            140px 60px 20px 2px rgba(170, 170, 170, 0.5),
+            60px 10px 20px 3px rgba(160, 160, 160, 0.6),
+            100px -10px 20px 3px rgba(150, 150, 150, 0.6);
+        animation: flashCloud 2s infinite ease-in-out;
+    }
+    50% {
+        transform: translate(300px, 120px) scale(1.05);
+        box-shadow:
+            50px 20px 0 0 rgba(204, 204, 204, 0.8),
+            70px -20px 0 0 rgba(204, 204, 204, 0.8),
+            130px 20px 0 0 rgba(204, 204, 204, 0.8),
+            170px 20px 0 0 rgba(204, 204, 204, 0.8),
+            100px 30px 0 0 rgba(204, 204, 204, 0.8),
+            120px -20px 0 0 rgba(204, 204, 204, 0.8),
+            150px 10px 0 0 rgba(204, 204, 204, 0.8),
+            30px 55px 20px 2px rgba(190, 190, 190, 0.5),
+            90px 45px 20px 2px rgba(180, 180, 180, 0.5),
+            150px 65px 20px 2px rgba(170, 170, 170, 0.5),
+            70px 15px 20px 3px rgba(160, 160, 160, 0.6),
+            110px -5px 20px 3px rgba(150, 150, 150, 0.6);
+    }
+}
+/* 音乐符号样式 */
+.cloud_thunder .music_symbol {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 50px;
+    left: 100px;
+    opacity: 0;
+    transform: scale(0.5) rotate(0deg);
+    filter: blur(3px);
+    animation: musicSymbolAnimation 3s ease-in-out infinite;
+    background: url('music-notes-svgrepo-com.svg') no-repeat center center;
+    background-size: contain;
+}
+
+/* 音乐符号动画 */
+@keyframes musicSymbolAnimation {
+    0%, 90%, 100% {
+        opacity: 0;
+        transform: scale(0.5) rotate(0deg);
+        filter: blur(3px);
+    }
+    10% {
+        opacity: 1;
+        transform: scale(1) rotate(10deg);
+        filter: blur(0px);
+    }
+    20% {
+        transform: scale(1.1) rotate(-10deg);
+        filter: blur(1px);
+    }
+    30% {
+        transform: scale(1) rotate(0deg);
+        filter: blur(0px);
+        opacity: 1;
+    }
+    40% {
+        transform: scale(1) rotate(0deg);
+        filter: blur(0px);
+        opacity: 0;
+    }
+}
+/*
+   晴天效果
+   添加太阳的样式，通过半径或圆形来展示太阳
+   可能通过渐变或光线效果增加立体感
+*/
+.container .cloud_sun{
+    width: 100px;
+    height: 100px;
+    background: #ccc;
+    position: absolute;
+    transform: translate(100px,120px);
+    border-radius: 50%;
+    box-shadow: 
+        40px 20px 0 0 #ccc,
+        60px -20px 0 0 #ccc,
+        120px 20px 0 0 #ccc,
+        160px 20px 0 0 #ccc,
+        90px 30px 0 0 #ccc,
+        110px -20px 0 0 #ccc,
+        140px 10px 0 0 #ccc;
+    animation: moveSunClouds 5s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+}
+
+.cloud_sun::before, .cloud_sun::after {
+    content: '';
+    position: absolute;
+    background: #ccc;
+    border-radius: 50%;
+}
+
+.cloud_sun::before {
+    width: 160px;
+    height: 80px; /* 扁平化 */
+    top: 10px;
+    left: -10px;
+
+}
+
+.cloud_sun::after {
+    width: 200px;
+    height: 15px;
+    bottom: -100px;
+    left: 20px;
+    background: rgba(150, 150, 150, 0.6);
+    border-radius: 50%;
+    content: '';
+    position: absolute;
+    opacity: 1; /* 初始不透明度 */
+}
+
+@keyframes moveSunClouds {
+    0% {
+        transform: translate(100px, 120px);
+        box-shadow:
+            40px 20px 0 0 rgba(204, 204, 204, 0.8),
+            60px -20px 0 0 rgba(204, 204, 204, 0.8),
+            120px 20px 0 0 rgba(204, 204, 204, 0.8),
+            160px 20px 0 0 rgba(204, 204, 204, 0.8),
+            90px 30px 0 0 rgba(204, 204, 204, 0.8),
+            110px -20px 0 0 rgba(204, 204, 204, 0.8),
+            140px 10px 0 0 rgba(204, 204, 204, 0.8),
+            20px 50px 20px 2px rgba(190, 190, 190, 0.5),
+            80px 40px 20px 2px rgba(180, 180, 180, 0.5),
+            140px 60px 20px 2px rgba(170, 170, 170, 0.5),
+            60px 10px 20px 3px rgba(160, 160, 160, 0.6),
+            100px -10px 20px 3px rgba(150, 150, 150, 0.6);
+        opacity: 1; /* 初始不透明度 */
+    }
+    50% {
+        transform: translate(300px, 120px) scale(1.05);
+        box-shadow:
+            50px 20px 0 0 rgba(204, 204, 204, 0.8),
+            70px -20px 0 0 rgba(204, 204, 204, 0.8),
+            130px 20px 0 0 rgba(204, 204, 204, 0.8),
+            170px 20px 0 0 rgba(204, 204, 204, 0.8),
+            100px 30px 0 0 rgba(204, 204, 204, 0.8),
+            120px -20px 0 0 rgba(204, 204, 204, 0.8),
+            150px 10px 0 0 rgba(204, 204, 204, 0.8),
+            30px 55px 20px 2px rgba(190, 190, 190, 0.5),
+            90px 45px 20px 2px rgba(180, 180, 180, 0.5),
+            150px 65px 20px 2px rgba(170, 170, 170, 0.5),
+            70px 15px 20px 3px rgba(160, 160, 160, 0.6),
+            110px -5px 20px 3px rgba(150, 150, 150, 0.6);
+        opacity: 0.5; /* 中段整体变淡 */
+    }
+    100% {
+        transform: translate(100px, 120px);
+        box-shadow:
+            40px 20px 0 0 rgba(204, 204, 204, 0.8),
+            60px -20px 0 0 rgba(204, 204, 204, 0.8),
+            120px 20px 0 0 rgba(204, 204, 204, 0.8),
+            160px 20px 0 0 rgba(204, 204, 204, 0.8),
+            90px 30px 0 0 rgba(204, 204, 204, 0.8),
+            110px -20px 0 0 rgba(204, 204, 204, 0.8),
+            140px 10px 0 0 rgba(204, 204, 204, 0.8),
+            20px 50px 20px 2px rgba(190, 190, 190, 0.5),
+            80px 40px 20px 2px rgba(180, 180, 180, 0.5),
+            140px 60px 20px 2px rgba(170, 170, 170, 0.5),
+            60px 10px 20px 3px rgba(160, 160, 160, 0.6),
+            100px -10px 20px 3px rgba(150, 150, 150, 0.6);
+        opacity: 1; /* 恢复初始不透明度 */
+    }
+}
+.sun {
+    width: 50px;
+    height: 50px;
+    background: #FFD700; /* Sun color */
+    position: absolute;
+    top: 60px;
+    border-radius: 50%; /* Circular sun */
+    box-shadow: 0 0 50px 10px rgba(255, 215, 0, 0.7); /* Glowing effect */
+}
+
+.sun::before,
+.sun::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+}
+
+.sun::before {
+    animation: rotateRays 5s linear infinite;
+}
+
+.sun::after {
+    animation: expandContract 5s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+}
+
+/* Triangular rays around the sun */
+.sun::before,
+.sun::after {
+    box-shadow: 
+        0 -60px 0 -20px rgba(255, 215, 0, 0.8),  /* Top ray */
+        42px -42px 0 -20px rgba(255, 215, 0, 0.8), /* Top-right ray */
+        60px 0 0 -20px rgba(255, 215, 0, 0.8),  /* Right ray */
+        42px 42px 0 -20px rgba(255, 215, 0, 0.8), /* Bottom-right ray */
+        0 60px 0 -20px rgba(255, 215, 0, 0.8),  /* Bottom ray */
+        -42px 42px 0 -20px rgba(255, 215, 0, 0.8), /* Bottom-left ray */
+        -60px 0 0 -20px rgba(255, 215, 0, 0.8), /* Left ray */
+        -42px -42px 0 -20px rgba(255, 215, 0, 0.8); /* Top-left ray */
+}
+
+/* Animation to rotate the sun rays */
+@keyframes rotateRays {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Animation for breathing effect (expand/contract) */
+@keyframes expandContract {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+}
