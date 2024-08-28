@@ -1,12 +1,17 @@
 // 正确的jQuery加载方式
 (function() {
-    const script = document.createElement('script');
-    script.src = "https://code.jquery.com/jquery-3.6.0.min.js";
-    script.onload = function() {
-        // jQuery加载完毕，执行主逻辑
+    if (!window.jQuery) {
+        const script = document.createElement('script');
+        script.src = "https://code.jquery.com/jquery-3.6.0.min.js";
+        script.onload = function() {
+            // jQuery loaded, execute main logic
+            fetchLocationAndWeather();
+        };
+        document.head.appendChild(script);
+    } else {
+        // jQuery already loaded, directly execute main logic
         fetchLocationAndWeather();
-    };
-    document.head.appendChild(script);
+    }
 })();
 
 function showWeather(weatherType) {
