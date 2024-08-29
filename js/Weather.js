@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
     })();
 
     function fetchLocationAndWeather() {
-        const apiKey = 'YOUR_API_KEY'; // 替换为你的API Key
+        const apiKey = 'ff824c952c034da8b824fe089d16cf05'; // 替换为你的API Key
         const locationId = '101010100'; // 替换为你要查询的LocationID
 
         $.ajax({
