@@ -109,6 +109,9 @@ document.addEventListener('DOMContentLoaded', function() {
             const weather = data.weather[0].main.toLowerCase();
             console.log('Weather:', weather); // 调试: 输出天气情况
 
+            // 弹窗提示天气信息
+            alert(`Current weather in ${city}: ${weather}`);
+
             // 根据条件显示天气效果
             if (weather.includes('cloud')) {
                 console.log('Displaying Cloudy Weather');
