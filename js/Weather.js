@@ -1,4 +1,3 @@
-// 确保在 DOM 完全加载后再执行代码
 document.addEventListener('DOMContentLoaded', function() {
     // 正确的jQuery加载方式
     (function() {
@@ -80,6 +79,9 @@ document.addEventListener('DOMContentLoaded', function() {
             const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
             const apiUrl = 'https://apis.map.qq.com/ws/location/v1/ip?key=QNWBZ-K24WT-Z4CXP-VWWLJ-YC6FE-UFFVM&output=json';
             const response = await fetch(proxyUrl + apiUrl);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
             const data = await response.json();
             console.log('Location Data:', data);
             if (data.status === 0) {
