@@ -130,3 +130,33 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+
+function toggleButtons() {
+    const buttons = document.querySelectorAll('.weather-widget .buttons button:not(:last-child)');
+    buttons.forEach(button => {
+      if (button.style.display === 'none') {
+        button.style.display = 'block';
+        button.style.animation = 'appear 0.5s ease';
+      } else {
+        button.style.animation = 'disappear 0.5s ease';
+        setTimeout(() => {
+          button.style.display = 'none';
+        }, 500);
+      }
+    });
+  }
+  
+  // 添加动画关键帧
+  const style = document.createElement('style');
+  style.innerHTML = `
+    @keyframes disappear {
+      0% { opacity: 1; transform: scale(1); }
+      100% { opacity: 0; transform: scale(0); }
+    }
+    @keyframes appear {
+      0% { opacity: 0; transform: scale(0); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+  `;
+  document.head.appendChild(style);
