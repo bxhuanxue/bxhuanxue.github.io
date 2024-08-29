@@ -37,7 +37,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     } else if (weatherText.includes("晴")) {
                         weatherType = 'sun';
                     } else {
-                        // 抛出异常并显示 text 的值
                         console.error('未识别的天气类型:', weatherText);
                         weatherType = 'unknown';
                     }
@@ -61,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('Weather container not found!');
             return;
         }
-        
+
         container.innerHTML = ''; // 清空容器内容
 
         if (weatherType === 'cloud') {
@@ -115,6 +114,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 '</div>';
         } else if (weatherType === 'unknown') {
             container.innerHTML = `<div class="unknown">无法识别的天气类型: ${weatherText}</div>`;
+        } else if (weatherType === 'close') {
+            container.innerHTML = ''; // 关闭天气效果
         }
     }
 });
