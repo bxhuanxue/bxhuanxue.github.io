@@ -95,29 +95,12 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     })();
 
-    async function fetchLocationAndWeather() {
-        try {
-            const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-            const apiUrl = 'https://apis.map.qq.com/ws/location/v1/ip?key=QNWBZ-K24WT-Z4CXP-VWWLJ-YC6FE-UFFVM&output=json';
-            const response = await fetch(proxyUrl + apiUrl);
-            const data = await response.json();
-            console.log('Location Data:', data);
-            if (data.status === 0) {
-                const city = data.result.ad_info.city;
-                getWeather(city);
-            } else {
-                console.error('Failed to retrieve location:', data.message);
-            }
-        } catch (error) {
-            console.error('Location API Error:', error);
-        }
-    }
-
-    function getWeather(city) {
+    function fetchLocationAndWeather() {
         const apiKey = 'ff824c952c034da8b824fe089d16cf05'; // 替换为你的API Key
+        const locationId = '101010100'; // 替换为你要查询的LocationID
 
         $.ajax({
-            url: `https://devapi.qweather.com/v7/weather/now?location=${city}&key=${apiKey}`,
+            url: `https://devapi.qweather.com/v7/weather/now?location=${locationId}&key=${apiKey}`,
             type: 'GET',
             dataType: 'json',
             success: function(data) {
