@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // 给按钮添加点击事件监听
-    document.querySelectorAll('.buttons button').forEach(button => {
+    document.querySelectorAll('.buttons button[onclick^="showWeather"]').forEach(button => {
         button.addEventListener('click', function() {
             const weatherType = this.getAttribute('onclick').match(/'(.*?)'/)[1];
             showWeather(weatherType);
