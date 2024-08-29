@@ -22,34 +22,29 @@ document.addEventListener('DOMContentLoaded', function() {
             dataType: 'json',
             success: function(data) {
                 if (data.code === "200") {
-                    const weatherIconCode = data.now.icon;
+                    const weatherText = data.now.text;
                     let weatherType;
 
-                    // 根据天气代码确定天气类型
-                    if (weatherIconCode >= 100 && weatherIconCode < 200) {
-                        // 晴天和多云
-                        weatherType = (weatherIconCode == 100) ? 'sun' : 'cloud';
-                    } else if (weatherIconCode >= 200 && weatherIconCode < 300) {
-                        // 风、沙尘等天气
-                        weatherType = 'cloud'; // 可以根据具体需求修改
-                    } else if (weatherIconCode >= 300 && weatherIconCode < 400) {
-                        // 雨
+                    // 根据 weatherText 确定天气类型
+                    if (weatherText.includes("雨")) {
                         weatherType = 'rain';
-                    } else if (weatherIconCode >= 400 && weatherIconCode < 500) {
-                        // 雪
-                        weatherType = 'snow';
-                    } else if (weatherIconCode >= 500 && weatherIconCode < 600) {
-                        // 雨夹雪、冰雹等天气
-                        weatherType = 'snow'; // 可以根据具体需求修改
-                    } else if (weatherIconCode >= 600 && weatherIconCode < 700) {
-                        // 雷电
+                    } else if (weatherText.includes("云")) {
+                        weatherType = 'cloud';
+                    } else if (weatherText.includes("雷")) {
                         weatherType = 'thunder';
+                    } else if (weatherText.includes("雪")) {
+                        weatherType = 'snow';
+                    } else if (weatherText.includes("晴")) {
+                        weatherType = 'sun';
                     } else {
-                        // 其他天气
-                        weatherType = 'close';
+                        // 抛出异常并显示 text 的值
+                        console.error('未识别的天气类型:', weatherText);
+                        weatherType = 'unknown';
                     }
 
-                    showWeather(weatherType);
+                    if (weatherType !== 'unknown') {
+                        showWeather(weatherType);
+                    }
                 } else {
                     console.error('Failed to fetch weather data: ', data.code);
                 }
@@ -118,8 +113,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 '<div class="cloud_sun">' +
                     '<div class="sun"></div>' +
                 '</div>';
-        } else if (weatherType === 'close'){
-            container.innerHTML = '';
+        } else if (weatherType === 'unknown') {
+            container.innerHTML = `<div class="unknown">无法识别的天气类型: ${weatherText}</div>`;
         }
     }
 });
