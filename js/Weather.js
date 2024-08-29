@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const locationId = '101010100'; // 替换为你要查询的LocationID
 
         $.ajax({
-            url: `https://api.qweather.com/v7/weather/now?location=${locationId}&key=${apiKey}`,
+            url: `https://devapi.qweather.com/v7/weather/now?location=${locationId}&key=${apiKey}`,
             type: 'GET',
             dataType: 'json',
             success: function(data) {
