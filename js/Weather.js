@@ -1,4 +1,3 @@
-// 正确的jQuery加载方式
 (function() {
     if (!window.jQuery) {
         const script = document.createElement('script');
@@ -16,7 +15,7 @@
 
 function showWeather(weatherType) {
     const container = document.getElementById('weather-container');
-    container.innerHTML = ''; // 清空容器内容
+    container.innerHTML = ''; // Clear the container content
 
     if (weatherType === 'cloud') {
         container.innerHTML = `<div class="cloud"></div>`;
@@ -77,19 +76,20 @@ function showWeather(weatherType) {
 }
 
 // 获取用户位置和天气数据
-async function fetchLocationAndWeather() {
-    try {
-        const response = await fetch('https://apis.map.qq.com/ws/location/v1/ip?key=QNWBZ-K24WT-Z4CXP-VWWLJ-YC6FE-UFFVM&output=jsonp');
-        const data = await response.json();
-        console.log('Location Data:', data);
-        if (data.status === 0) {
-            const city = data.result.ad_info.city;
-            getWeather(city);
-        } else {
-            console.error('Failed to retrieve location:', data.message);
-        }
-    } catch (error) {
-        console.error('Location API Error:', error);
+function fetchLocationAndWeather() {
+    const script = document.createElement('script');
+    script.src = 'https://apis.map.qq.com/ws/location/v1/ip?key=QNWBZ-K24WT-Z4CXP-VWWLJ-YC6FE-UFFVM&output=jsonp&callback=handleLocationResponse';
+    document.body.appendChild(script);
+}
+
+// Callback function to handle JSONP response
+function handleLocationResponse(data) {
+    console.log('Location Data:', data);
+    if (data.status === 0) {
+        const city = data.result.ad_info.city;
+        getWeather(city);
+    } else {
+        console.error('Failed to retrieve location:', data.message);
     }
 }
 
