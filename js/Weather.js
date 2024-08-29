@@ -76,9 +76,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // 获取用户位置和天气数据
     async function fetchLocationAndWeather() {
         try {
-            const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
             const apiUrl = 'https://apis.map.qq.com/ws/location/v1/ip?key=QNWBZ-K24WT-Z4CXP-VWWLJ-YC6FE-UFFVM&output=json';
-            const response = await fetch(proxyUrl + apiUrl);
+            const response = await fetch(apiUrl);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
