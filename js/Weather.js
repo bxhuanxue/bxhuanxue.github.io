@@ -123,8 +123,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // 给按钮添加点击事件监听
-    document.getElementById('change-weather-button').addEventListener('click', function() {
-        weatherShown = false; // 重置标志变量，允许天气效果被更新
-        fetchLocationAndWeather(); // 再次获取天气数据并更新显示
+    document.querySelectorAll('.buttons button').forEach(button => {
+        button.addEventListener('click', function() {
+            const weatherType = this.getAttribute('onclick').match(/'(.*?)'/)[1];
+            showWeather(weatherType);
+        });
     });
 });
